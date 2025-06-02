@@ -7,10 +7,36 @@
     <title>tomfoolery</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗡️</text></svg>">
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="lib/react.development.js"></script>
+    <script src="lib/react-dom.development.js"></script>
+    <script src="lib/babel.min.js"></script>
 
+    <style>
+document, body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background-color: black;
+  font-family: 'Taggeschrift', serif;
+}
+
+@font-face {
+    font-family: 'Taggeschrift';
+    src: url('lib/Tagesschrift-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+button {
+  font-family: 'Taggeschrift', serif;
+  border: 0.1rem solid white;
+  background-color: #333333;
+  color: white;
+  border-radius: 0;
+  &:hover { filter: brightness(1.5); }
+  &:active { filter: blur(0.03rem) brightness(1.5); }
+}
+  </style>
   </head>
   <body>
     <div id="root"></div>
@@ -22,8 +48,67 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(<App />);
 
+function CharacterStatus({ icon, name, hp }) {
+  return <div style={{
+    padding: '0.4rem',
+  }}>
+    <div style={{
+      width: '100%',
+      display: 'flex',
+      fontSize: '4rem',
+      justifyContent: 'center',
+    }}>
+      { icon }
+    </div>
+    { name }
+    <div style={{
+      width: '5rem',
+      height: '0.7rem',
+      border: '0.1rem solid white'
+    }}>
+      <div style={{
+        width: (hp * 100) + '%',
+        height: '100%',
+        backgroundColor: 'chartreuse',
+      }}>
+      </div>
+    </div>
+  </div>
+}
+
 function App() {
-  return <h1> hi </h1>
+  return <div style={{
+    color: 'white',
+    display: 'flex',
+    width: '100vw',
+    height: '100vh',
+    alignItems: 'center',
+  }}>
+    <div style={{
+      width: '100%',
+      padding: '3.0rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+
+      <div style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+        <CharacterStatus icon='🦑' name="Tentacle" hp={0.5}></CharacterStatus>
+        <CharacterStatus icon='🤷' name="Player"   hp={0.5}></CharacterStatus>
+      </div>
+
+      <button style={{
+      }}>
+        Hit 'em!
+      </button>
+
+    </div>
+  </div>;
 }
 
     </script>
